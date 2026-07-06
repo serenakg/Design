@@ -41,3 +41,38 @@ export const STATUS_LABELS: Record<ContactStatus, string> = {
   subscriber: "Subscriber",
   paid: "Paid",
 };
+
+export type BlogStatus = "draft" | "pending_approval" | "published";
+
+export type BlogPost = {
+  id: string;
+  workspace_id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  status: BlogStatus;
+  approved_by: string | null;
+  created_by: string | null;
+  published_at: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
+export const BLOG_STATUS_LABELS: Record<BlogStatus, string> = {
+  draft: "Draft",
+  pending_approval: "Awaiting sign-off",
+  published: "Published",
+};
+
+export type LeadMagnet = {
+  id: string;
+  workspace_id: string;
+  slug: string;
+  title: string;
+  description: string;
+  file_url: string;
+  tag: string;
+  active: boolean;
+  created_at: string;
+};

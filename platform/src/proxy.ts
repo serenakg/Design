@@ -32,8 +32,12 @@ export async function proxy(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const isLoginPage = request.nextUrl.pathname.startsWith("/login");
-  if (!user && !isLoginPage) {
+  const pathname = request.nextUrl.pathname;
+  const isLoginPage = pathname.startsWith("/login");
+  // Public workspace sites (Phase 2) need no login. RLS still applies:
+  // anonymous visitors only ever see published posts and active magnets.
+  const isPublicSite = pathname === "/p" || pathname.startsWith("/p/");
+  if (!user && !isLoginPage && !isPublicSite) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     return NextResponse.redirect(url);

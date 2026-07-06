@@ -6,13 +6,14 @@ import { usePathname } from "next/navigation";
 const LIVE_ITEMS = [
   { href: "", label: "Dashboard" },
   { href: "/contacts", label: "Contacts" },
+  { href: "/blog", label: "Blog" },
+  { href: "/magnets", label: "Lead magnets" },
   { href: "/settings", label: "Settings & GDPR" },
 ];
 
 // Later phases stay visible so the shape of the platform is clear,
 // but they're inert until their phase ships.
 const UPCOMING = [
-  { label: "Site & Blog", phase: 2 },
   { label: "Email & Funnels", phase: 3 },
   { label: "Social Builder", phase: 4 },
   { label: "Community", phase: 5 },
@@ -61,6 +62,14 @@ export function WorkspaceNav({ slug }: { slug: string }) {
           </span>
         </span>
       ))}
+      <a
+        href={`/p/${slug}`}
+        target="_blank"
+        rel="noreferrer"
+        className="mt-2 rounded-lg px-2 py-1.5 text-sm text-stone-700 underline underline-offset-4 hover:bg-stone-100"
+      >
+        View public site ↗
+      </a>
     </nav>
   );
 }
