@@ -2,17 +2,24 @@
 
 import { useRef, useState, useTransition } from "react";
 import { createClient } from "@/lib/supabase/client";
-import type { LeadMagnet, Workspace } from "@/lib/types";
-import { createMagnet, deleteMagnet, setMagnetActive } from "./actions";
+import type { EmailSequence, LeadMagnet, Workspace } from "@/lib/types";
+import {
+  createMagnet,
+  deleteMagnet,
+  setMagnetActive,
+  setMagnetSequence,
+} from "./actions";
 
 export function MagnetsManager({
   workspace,
   slug,
   magnets,
+  sequences,
 }: {
   workspace: Workspace;
   slug: string;
   magnets: LeadMagnet[];
+  sequences: Pick<EmailSequence, "id" | "name" | "status">[];
 }) {
   const [showAdd, setShowAdd] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -197,6 +204,26 @@ export function MagnetsManager({
               >
                 {m.active ? "Live" : "Off"}
               </span>
+              <label className="flex shrink-0 items-center gap-2 text-xs font-medium text-stone-600">
+                Then start sequence:
+                <select
+                  value={m.sequence_id ?? ""}
+                  onChange={(e) =>
+                    run(() =>
+                      setMagnetSequence(m.id, slug, e.target.value || null)
+                    )
+                  }
+                  className="rounded-lg border border-stone-300 px-2 py-1.5 text-sm font-normal"
+                >
+                  <option value="">None</option>
+                  {sequences.map((s) => (
+                    <option key={s.id} value={s.id}>
+                      {s.name}
+                      {s.status !== "active" ? " (not active)" : ""}
+                    </option>
+                  ))}
+                </select>
+              </label>
               <div className="flex w-full flex-wrap gap-2 border-t border-stone-100 pt-3 sm:w-auto sm:border-0 sm:pt-0">
                 <a
                   href={`/p/${slug}/free/${m.slug}`}

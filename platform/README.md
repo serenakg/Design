@@ -2,7 +2,7 @@
 
 An owned, all-in-one platform with **two walled workspaces** that never mix.
 Built so far: **Phase 0 (foundations) + Phase 1 (the contact spine) +
-Phase 2 (public site, blog, lead magnets)** of the
+Phase 2 (public site, blog, lead magnets) + Phase 3 (email + funnels)** of the
 [7-phase build plan](../docs/handoff/2-build-plan.md), built to the
 [Rules of the House](../docs/handoff/3-rules-of-the-house.md).
 
@@ -20,7 +20,11 @@ contact spine (add, edit, tag, filter, search, lead→subscriber→paid with €
 per-contact GDPR export & erase · workspace-wide export · dashboard ·
 **public site per workspace at `/p/<workspace>`** · blog with draft →
 sign-off → publish workflow (Markdown) · lead magnets whose landing pages
-create consented contacts in the right workspace's spine automatically.
+create consented contacts in the right workspace's spine automatically ·
+**email sequences** (welcome/nurture, auto-enrol on new contact or lead
+magnet claim) · **broadcasts** to consent-only segments, with the same
+sign-off gate · activity log where every send, skip, and failure is
+visible · one-click unsubscribe.
 
 ## Go-live (owner does this, ~30 minutes)
 
@@ -31,7 +35,7 @@ as members afterwards — never owners.
    (region: EU, e.g. Frankfurt — this data must stay in the EU).
 2. In the Supabase **SQL Editor**, run the files in
    [`supabase/migrations/`](supabase/migrations/) in order
-   (`0001…`, `0002…`, `0003…`).
+   (`0001…` through `0004…`).
 3. **Vercel** — import this repo at [vercel.com](https://vercel.com), set the
    root directory to `platform/`, and add the two environment variables from
    [`.env.example`](.env.example) (values are in Supabase → Project Settings → API).
@@ -43,7 +47,14 @@ as members afterwards — never owners.
    This promotes you to owner and grants you both workspaces. It only works
    once, and can't be called from the app.
 5. **Backups** — in Supabase → Database → Backups, confirm daily backups are on.
-6. Add every login to NordPass and switch on 2FA (Supabase + Vercel especially).
+6. **Resend** (email) — create an account at [resend.com](https://resend.com)
+   under the owner's email, verify your sending domain, and add the Phase 3
+   environment variables from [`.env.example`](.env.example) to Vercel
+   (`SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`, `EMAIL_FROM`,
+   `CRON_SECRET`, `NEXT_PUBLIC_SITE_URL`). The included
+   [`vercel.json`](vercel.json) runs the sender every 10 minutes.
+   Per the build plan: keep Kit running in parallel until this is proven.
+7. Add every login to NordPass and switch on 2FA (Supabase + Vercel especially).
 
 **Done-when check (from the brief):** sign in, add a contact, refresh — it's
 still there, at your own URL. Create a second (dev) account, grant it one
@@ -75,11 +86,17 @@ The migrations were run against a clean PostgreSQL 16 with RLS tests proving:
   without consent or for inactive magnets;
 - GDPR export returns everything held on a contact; GDPR erase removes the
   contact and all linked memberships/enrolments;
-- non-owners cannot call `setup_owner()` or grant themselves workspace access.
+- non-owners cannot call `setup_owner()` or grant themselves workspace access;
+- email: new contacts auto-enrol in the right workspace's active sequences
+  only; contacts without consent are logged as skipped, never sent; delays
+  are respected; sequences can't be activated and broadcasts can't be
+  scheduled without sign-off; broadcasts expand to consented, matching
+  contacts only; one-click unsubscribe clears consent for good; the queue
+  functions reject app-role callers (service-role only).
 
 ## What's next (one phase at a time)
 
-Phase 3 — email + funnels (Resend) · Phase 4 — AI social builder
+Phase 4 — AI social builder
 with the approval gate · Phase 5 — community (Delia / FemNEST) · Phase 6 —
 courses · Phase 7 — team invites + per-workspace publish permissions.
 

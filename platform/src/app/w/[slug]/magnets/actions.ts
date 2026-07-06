@@ -63,6 +63,22 @@ export async function setMagnetActive(
   return { ok: true };
 }
 
+// Link a magnet to a sequence: landing page → capture → sequence.
+export async function setMagnetSequence(
+  magnetId: string,
+  slug: string,
+  sequenceId: string | null
+): Promise<ActionResult> {
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from("lead_magnets")
+    .update({ sequence_id: sequenceId })
+    .eq("id", magnetId);
+  if (error) return { ok: false, error: error.message };
+  revalidatePath(`/w/${slug}/magnets`);
+  return { ok: true };
+}
+
 export async function deleteMagnet(
   magnetId: string,
   slug: string

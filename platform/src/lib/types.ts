@@ -74,5 +74,74 @@ export type LeadMagnet = {
   file_url: string;
   tag: string;
   active: boolean;
+  sequence_id: string | null;
   created_at: string;
+};
+
+export type SequenceStatus = "draft" | "pending_approval" | "active" | "paused";
+
+export type EmailSequence = {
+  id: string;
+  workspace_id: string;
+  name: string;
+  trigger_event: "contact_created" | "lead_magnet";
+  status: SequenceStatus;
+  approved_by: string | null;
+  created_at: string;
+};
+
+export const SEQUENCE_STATUS_LABELS: Record<SequenceStatus, string> = {
+  draft: "Draft",
+  pending_approval: "Awaiting sign-off",
+  active: "Active",
+  paused: "Paused",
+};
+
+export type SequenceEmail = {
+  id: string;
+  workspace_id: string;
+  sequence_id: string;
+  position: number;
+  delay_hours: number;
+  subject: string;
+  body: string;
+};
+
+export type BroadcastStatus =
+  | "draft"
+  | "pending_approval"
+  | "scheduled"
+  | "sending"
+  | "sent";
+
+export type Broadcast = {
+  id: string;
+  workspace_id: string;
+  subject: string;
+  body: string;
+  segment_status: "all" | ContactStatus;
+  segment_tag: string;
+  status: BroadcastStatus;
+  scheduled_at: string | null;
+  approved_by: string | null;
+  created_at: string;
+};
+
+export const BROADCAST_STATUS_LABELS: Record<BroadcastStatus, string> = {
+  draft: "Draft",
+  pending_approval: "Awaiting sign-off",
+  scheduled: "Scheduled",
+  sending: "Sending",
+  sent: "Sent",
+};
+
+export type EmailLogEntry = {
+  id: string;
+  workspace_id: string;
+  to_email: string;
+  subject: string;
+  status: "queued" | "sending" | "sent" | "failed" | "skipped_no_consent";
+  error: string | null;
+  queued_at: string;
+  sent_at: string | null;
 };
