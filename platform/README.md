@@ -1,8 +1,8 @@
 # The Platform — Serena Gasparini · FemNEST
 
 An owned, all-in-one platform with **two walled workspaces** that never mix.
-Built so far: **Phase 0 (foundations) + Phase 1 (the contact spine) +
-Phase 2 (public site, blog, lead magnets) + Phase 3 (email + funnels)** of the
+Built so far: **Phases 0–4: foundations, the contact spine, public
+site + blog + lead magnets, email + funnels, and the AI social builder** of the
 [7-phase build plan](../docs/handoff/2-build-plan.md), built to the
 [Rules of the House](../docs/handoff/3-rules-of-the-house.md).
 
@@ -24,7 +24,10 @@ create consented contacts in the right workspace's spine automatically ·
 **email sequences** (welcome/nurture, auto-enrol on new contact or lead
 magnet claim) · **broadcasts** to consent-only segments, with the same
 sign-off gate · activity log where every send, skip, and failure is
-visible · one-click unsubscribe.
+visible · one-click unsubscribe · **AI social builder**: topic in → Claude
+writes the caption in that workspace's voice → branded graphic → sign-off →
+calendar → auto-post via a connector webhook (retry once, then alert the
+owner — never silent-fail).
 
 ## Go-live (owner does this, ~30 minutes)
 
@@ -35,7 +38,7 @@ as members afterwards — never owners.
    (region: EU, e.g. Frankfurt — this data must stay in the EU).
 2. In the Supabase **SQL Editor**, run the files in
    [`supabase/migrations/`](supabase/migrations/) in order
-   (`0001…` through `0004…`).
+   (`0001…` through `0005…`).
 3. **Vercel** — import this repo at [vercel.com](https://vercel.com), set the
    root directory to `platform/`, and add the two environment variables from
    [`.env.example`](.env.example) (values are in Supabase → Project Settings → API).
@@ -54,7 +57,13 @@ as members afterwards — never owners.
    `CRON_SECRET`, `NEXT_PUBLIC_SITE_URL`). The included
    [`vercel.json`](vercel.json) runs the sender every 10 minutes.
    Per the build plan: keep Kit running in parallel until this is proven.
-7. Add every login to NordPass and switch on 2FA (Supabase + Vercel especially).
+7. **Anthropic** (AI captions) — create an API key at
+   [console.anthropic.com](https://console.anthropic.com) under the owner's
+   email and add `ANTHROPIC_API_KEY` to Vercel. For auto-posting at go-live,
+   point `SOCIAL_WEBHOOK_URL` at a Make/Zapier/Buffer webhook (or a custom
+   Meta/LinkedIn integration) — until then, approved posts wait on the
+   calendar. This replaces Buffer only when proven.
+8. Add every login to NordPass and switch on 2FA (Supabase + Vercel especially).
 
 **Done-when check (from the brief):** sign in, add a contact, refresh — it's
 still there, at your own URL. Create a second (dev) account, grant it one

@@ -7,8 +7,45 @@ export type Workspace = {
     tagline?: string;
     community_name?: string;
     accent_soft?: string;
+    voice?: string;
+    from_email?: string;
   };
 };
+
+export type PostStatus =
+  | "draft"
+  | "pending_approval"
+  | "scheduled"
+  | "posted"
+  | "rejected";
+
+export type SocialPost = {
+  id: string;
+  workspace_id: string;
+  topic: string;
+  caption: string;
+  graphic_text: string;
+  media_url: string | null;
+  platforms: string[];
+  status: PostStatus;
+  scheduled_at: string | null;
+  posted_at: string | null;
+  post_error: string | null;
+  retry_count: number;
+  approved_by: string | null;
+  created_by: string | null;
+  created_at: string;
+};
+
+export const POST_STATUS_LABELS: Record<PostStatus, string> = {
+  draft: "Draft",
+  pending_approval: "Awaiting sign-off",
+  scheduled: "Scheduled",
+  posted: "Posted",
+  rejected: "Failed",
+};
+
+export const PLATFORMS = ["instagram", "linkedin", "threads"] as const;
 
 export type Profile = {
   id: string;

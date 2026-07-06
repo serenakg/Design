@@ -9,13 +9,13 @@ const LIVE_ITEMS = [
   { href: "/blog", label: "Blog" },
   { href: "/magnets", label: "Lead magnets" },
   { href: "/email", label: "Email & funnels" },
+  { href: "/social", label: "Social builder" },
   { href: "/settings", label: "Settings & GDPR" },
 ];
 
 // Later phases stay visible so the shape of the platform is clear,
 // but they're inert until their phase ships.
 const UPCOMING = [
-  { label: "Social Builder", phase: 4 },
   { label: "Community", phase: 5 },
   { label: "Courses", phase: 6 },
 ];
