@@ -47,6 +47,64 @@ export const POST_STATUS_LABELS: Record<PostStatus, string> = {
 
 export const PLATFORMS = ["instagram", "linkedin", "threads"] as const;
 
+export type Member = {
+  id: string;
+  workspace_id: string;
+  contact_id: string;
+  user_id: string | null;
+  tier: string;
+  display_name: string;
+  pronouns: string;
+  bio: string;
+  joined_at: string;
+};
+
+export type Space = {
+  id: string;
+  workspace_id: string;
+  slug: string;
+  name: string;
+  description: string;
+  position: number;
+  paid_only: boolean;
+};
+
+export type ModerationStatus = "published" | "hidden" | "removed";
+
+export type SpacePost = {
+  id: string;
+  workspace_id: string;
+  space_id: string;
+  author_member_id: string;
+  title: string;
+  body: string;
+  content_warning: string;
+  status: ModerationStatus;
+  created_at: string;
+  updated_at: string;
+};
+
+export type SpaceComment = {
+  id: string;
+  workspace_id: string;
+  post_id: string;
+  author_member_id: string;
+  body: string;
+  status: ModerationStatus;
+  created_at: string;
+};
+
+export type Flag = {
+  id: string;
+  workspace_id: string;
+  target_type: "post" | "comment";
+  target_id: string;
+  reporter_member_id: string | null;
+  reason: string;
+  status: "open" | "resolved";
+  created_at: string;
+};
+
 export type Profile = {
   id: string;
   email: string;

@@ -37,9 +37,11 @@ export async function proxy(request: NextRequest) {
   // Public workspace sites (Phase 2) need no login. RLS still applies:
   // anonymous visitors only ever see published posts and active magnets.
   const isPublicSite = pathname === "/p" || pathname.startsWith("/p/");
-  // Cron routes authenticate themselves with CRON_SECRET (no session).
+  // Cron routes authenticate themselves with CRON_SECRET (no session),
+  // webhooks with their own signatures (Stripe).
   const isCron = pathname.startsWith("/api/cron/");
-  if (!user && !isLoginPage && !isPublicSite && !isCron) {
+  const isWebhook = pathname.startsWith("/api/webhooks/");
+  if (!user && !isLoginPage && !isPublicSite && !isCron && !isWebhook) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     return NextResponse.redirect(url);

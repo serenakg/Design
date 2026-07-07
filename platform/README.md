@@ -1,8 +1,9 @@
 # The Platform — Serena Gasparini · FemNEST
 
 An owned, all-in-one platform with **two walled workspaces** that never mix.
-Built so far: **Phases 0–4: foundations, the contact spine, public
-site + blog + lead magnets, email + funnels, and the AI social builder** of the
+Built so far: **Phases 0–5: foundations, the contact spine, public
+site + blog + lead magnets, email + funnels, the AI social builder,
+and the communities (Delia + FemNEST)** of the
 [7-phase build plan](../docs/handoff/2-build-plan.md), built to the
 [Rules of the House](../docs/handoff/3-rules-of-the-house.md).
 
@@ -27,7 +28,11 @@ sign-off gate · activity log where every send, skip, and failure is
 visible · one-click unsubscribe · **AI social builder**: topic in → Claude
 writes the caption in that workspace's voice → branded graphic → sign-off →
 calendar → auto-post via a connector webhook (retry once, then alert the
-owner — never silent-fail).
+owner — never silent-fail) · **two communities at `/c/serena` (Delia) and
+`/c/femnest`**: spaces, member profiles (chosen name + optional pronouns),
+posts with first-class content warnings, quiet report button + team
+moderation queue, free/paid tiers with a Stripe paywall — and zero
+engagement-bait: no streaks, no leaderboards, nothing punishes being offline.
 
 ## Go-live (owner does this, ~30 minutes)
 
@@ -38,7 +43,7 @@ as members afterwards — never owners.
    (region: EU, e.g. Frankfurt — this data must stay in the EU).
 2. In the Supabase **SQL Editor**, run the files in
    [`supabase/migrations/`](supabase/migrations/) in order
-   (`0001…` through `0005…`).
+   (`0001…` through `0006…`).
 3. **Vercel** — import this repo at [vercel.com](https://vercel.com), set the
    root directory to `platform/`, and add the two environment variables from
    [`.env.example`](.env.example) (values are in Supabase → Project Settings → API).
@@ -63,7 +68,14 @@ as members afterwards — never owners.
    point `SOCIAL_WEBHOOK_URL` at a Make/Zapier/Buffer webhook (or a custom
    Meta/LinkedIn integration) — until then, approved posts wait on the
    calendar. This replaces Buffer only when proven.
-8. Add every login to NordPass and switch on 2FA (Supabase + Vercel especially).
+8. **Stripe** (paid membership) — in the owner's Stripe account, create a
+   Payment Link per workspace with **metadata `workspace_slug` = `serena` or
+   `femnest`** (payments without it are logged, never guessed at), paste the
+   link into that workspace's `brand_config.membership_payment_link`, add a
+   webhook for `checkout.session.completed` pointing at
+   `/api/webhooks/stripe`, and set `STRIPE_WEBHOOK_SECRET` in Vercel.
+   Sliding-scale pricing = multiple payment links at different amounts.
+9. Add every login to NordPass and switch on 2FA (Supabase + Vercel especially).
 
 **Done-when check (from the brief):** sign in, add a contact, refresh — it's
 still there, at your own URL. Create a second (dev) account, grant it one

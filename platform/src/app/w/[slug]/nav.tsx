@@ -10,15 +10,13 @@ const LIVE_ITEMS = [
   { href: "/magnets", label: "Lead magnets" },
   { href: "/email", label: "Email & funnels" },
   { href: "/social", label: "Social builder" },
+  { href: "/community", label: "Community" },
   { href: "/settings", label: "Settings & GDPR" },
 ];
 
 // Later phases stay visible so the shape of the platform is clear,
 // but they're inert until their phase ships.
-const UPCOMING = [
-  { label: "Community", phase: 5 },
-  { label: "Courses", phase: 6 },
-];
+const UPCOMING = [{ label: "Courses", phase: 6 }];
 
 export function WorkspaceNav({ slug }: { slug: string }) {
   const pathname = usePathname();
