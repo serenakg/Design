@@ -1,9 +1,9 @@
 # The Platform — Serena Gasparini · FemNEST
 
 An owned, all-in-one platform with **two walled workspaces** that never mix.
-Built so far: **Phases 0–5: foundations, the contact spine, public
+Built so far: **Phases 0–6: foundations, the contact spine, public
 site + blog + lead magnets, email + funnels, the AI social builder,
-and the communities (Delia + FemNEST)** of the
+the communities (Delia + FemNEST), and courses** of the
 [7-phase build plan](../docs/handoff/2-build-plan.md), built to the
 [Rules of the House](../docs/handoff/3-rules-of-the-house.md).
 
@@ -32,7 +32,10 @@ owner — never silent-fail) · **two communities at `/c/serena` (Delia) and
 `/c/femnest`**: spaces, member profiles (chosen name + optional pronouns),
 posts with first-class content warnings, quiet report button + team
 moderation queue, free/paid tiers with a Stripe paywall — and zero
-engagement-bait: no streaks, no leaderboards, nothing punishes being offline.
+engagement-bait: no streaks, no leaderboards, nothing punishes being offline ·
+**courses**: gated Markdown + video lessons on top of community membership
+(free or paid-tier), enrolment keyed to the contact record, private
+progress with no deadlines and nothing that expires.
 
 ## Go-live (owner does this, ~30 minutes)
 
@@ -43,7 +46,7 @@ as members afterwards — never owners.
    (region: EU, e.g. Frankfurt — this data must stay in the EU).
 2. In the Supabase **SQL Editor**, run the files in
    [`supabase/migrations/`](supabase/migrations/) in order
-   (`0001…` through `0006…`).
+   (`0001…` through `0007…`).
 3. **Vercel** — import this repo at [vercel.com](https://vercel.com), set the
    root directory to `platform/`, and add the two environment variables from
    [`.env.example`](.env.example) (values are in Supabase → Project Settings → API).

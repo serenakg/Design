@@ -11,12 +11,11 @@ const LIVE_ITEMS = [
   { href: "/email", label: "Email & funnels" },
   { href: "/social", label: "Social builder" },
   { href: "/community", label: "Community" },
+  { href: "/courses", label: "Courses" },
   { href: "/settings", label: "Settings & GDPR" },
 ];
 
-// Later phases stay visible so the shape of the platform is clear,
-// but they're inert until their phase ships.
-const UPCOMING = [{ label: "Courses", phase: 6 }];
+const UPCOMING: { label: string; phase: number }[] = [];
 
 export function WorkspaceNav({ slug }: { slug: string }) {
   const pathname = usePathname();
@@ -46,20 +45,24 @@ export function WorkspaceNav({ slug }: { slug: string }) {
           </Link>
         );
       })}
-      <p className="px-2 pt-3 pb-1 text-xs font-semibold tracking-wide text-stone-400 uppercase">
-        Coming next
-      </p>
-      {UPCOMING.map((item) => (
-        <span
-          key={item.label}
-          className="flex items-center justify-between rounded-lg px-2 py-1.5 text-sm text-stone-400"
-        >
-          {item.label}
-          <span className="rounded-full bg-stone-100 px-2 py-0.5 text-xs">
-            Phase {item.phase}
-          </span>
-        </span>
-      ))}
+      {UPCOMING.length > 0 && (
+        <>
+          <p className="px-2 pt-3 pb-1 text-xs font-semibold tracking-wide text-stone-400 uppercase">
+            Coming next
+          </p>
+          {UPCOMING.map((item) => (
+            <span
+              key={item.label}
+              className="flex items-center justify-between rounded-lg px-2 py-1.5 text-sm text-stone-400"
+            >
+              {item.label}
+              <span className="rounded-full bg-stone-100 px-2 py-0.5 text-xs">
+                Phase {item.phase}
+              </span>
+            </span>
+          ))}
+        </>
+      )}
       <a
         href={`/p/${slug}`}
         target="_blank"

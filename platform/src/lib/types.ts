@@ -94,6 +94,35 @@ export type SpaceComment = {
   created_at: string;
 };
 
+export type Course = {
+  id: string;
+  workspace_id: string;
+  title: string;
+  description: string;
+  published: boolean;
+  paid_only: boolean;
+  created_at: string;
+};
+
+export type Lesson = {
+  id: string;
+  workspace_id: string;
+  course_id: string;
+  title: string;
+  content: string;
+  video_url: string | null;
+  position: number;
+};
+
+export type Enrolment = {
+  id: string;
+  workspace_id: string;
+  course_id: string;
+  contact_id: string;
+  progress: { completed?: string[] };
+  enrolled_at: string;
+};
+
 export type Flag = {
   id: string;
   workspace_id: string;

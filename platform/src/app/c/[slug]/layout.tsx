@@ -40,6 +40,12 @@ export default async function CommunityLayout({
               Spaces
             </Link>
             <Link
+              href={`/c/${slug}/courses`}
+              className="text-stone-700 hover:text-stone-900"
+            >
+              Courses
+            </Link>
+            <Link
               href={`/c/${slug}/profile`}
               className="text-stone-700 hover:text-stone-900"
             >
