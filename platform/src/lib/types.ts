@@ -94,6 +94,16 @@ export type SpaceComment = {
   created_at: string;
 };
 
+export type TeamInvite = {
+  id: string;
+  email: string;
+  role: "admin" | "editor";
+  can_publish: boolean;
+  workspace_slugs: string[];
+  created_at: string;
+  accepted_at: string | null;
+};
+
 export type Course = {
   id: string;
   workspace_id: string;

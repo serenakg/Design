@@ -12,6 +12,7 @@ const LIVE_ITEMS = [
   { href: "/social", label: "Social builder" },
   { href: "/community", label: "Community" },
   { href: "/courses", label: "Courses" },
+  { href: "/team", label: "Team" },
   { href: "/settings", label: "Settings & GDPR" },
 ];
 

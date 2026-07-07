@@ -1,11 +1,11 @@
 # The Platform — Serena Gasparini · FemNEST
 
 An owned, all-in-one platform with **two walled workspaces** that never mix.
-Built so far: **Phases 0–6: foundations, the contact spine, public
-site + blog + lead magnets, email + funnels, the AI social builder,
-the communities (Delia + FemNEST), and courses** of the
-[7-phase build plan](../docs/handoff/2-build-plan.md), built to the
-[Rules of the House](../docs/handoff/3-rules-of-the-house.md).
+**All 7 phases of the [build plan](../docs/handoff/2-build-plan.md) are
+built**, to the [Rules of the House](../docs/handoff/3-rules-of-the-house.md):
+foundations, the contact spine, public site + blog + lead magnets,
+email + funnels, the AI social builder, the communities (Delia +
+FemNEST), courses, and team management.
 
 ## What's built and enforced
 
@@ -35,7 +35,11 @@ moderation queue, free/paid tiers with a Stripe paywall — and zero
 engagement-bait: no streaks, no leaderboards, nothing punishes being offline ·
 **courses**: gated Markdown + video lessons on top of community membership
 (free or paid-tier), enrolment keyed to the contact record, private
-progress with no deadlines and nothing that expires.
+progress with no deadlines and nothing that expires · **team management**:
+owner-only invites that pre-authorise an email with a role, publish
+rights, and exactly the workspaces that person may enter (applied
+automatically at signup), permission toggles per person, and a database
+guarantee the platform never loses its owner.
 
 ## Go-live (owner does this, ~30 minutes)
 
@@ -46,7 +50,7 @@ as members afterwards — never owners.
    (region: EU, e.g. Frankfurt — this data must stay in the EU).
 2. In the Supabase **SQL Editor**, run the files in
    [`supabase/migrations/`](supabase/migrations/) in order
-   (`0001…` through `0007…`).
+   (`0001…` through `0008…`).
 3. **Vercel** — import this repo at [vercel.com](https://vercel.com), set the
    root directory to `platform/`, and add the two environment variables from
    [`.env.example`](.env.example) (values are in Supabase → Project Settings → API).
@@ -118,11 +122,12 @@ The migrations were run against a clean PostgreSQL 16 with RLS tests proving:
   contacts only; one-click unsubscribe clears consent for good; the queue
   functions reject app-role callers (service-role only).
 
-## What's next (one phase at a time)
+## The build is complete
 
-Phase 4 — AI social builder
-with the approval gate · Phase 5 — community (Delia / FemNEST) · Phase 6 —
-courses · Phase 7 — team invites + per-workspace publish permissions.
-
-Every phase ships only when it passes all five DELIA checks
-(Diverse · Emotionally Safe · Life-Centred · Inclusive · Accessible).
+All seven phases are in. From here the golden rule from the build plan
+takes over: **replace one paid tool at a time, and only when the
+replacement is proven** — keep Squarespace/Kit/Buffer/Circle running in
+parallel until each corresponding piece has earned your trust. Every
+future feature still has to pass all five DELIA checks
+(Diverse · Emotionally Safe · Life-Centred · Inclusive · Accessible)
+before it ships.
