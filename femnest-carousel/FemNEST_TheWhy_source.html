@@ -178,18 +178,6 @@
     background: linear-gradient(180deg, var(--lavender), #9fb8ff);
     z-index: 1;
   }
-
-  /* ---------- LOGO ---------- */
-  .logo { position: absolute; z-index: 5; left: 96px; bottom: 88px; display: flex; align-items: center; gap: 26px; }
-  .logo .mark { width: 96px; height: 96px; flex: 0 0 auto; }
-  .logo .word {
-    font-family: 'Bitter', serif;
-    font-weight: 800;
-    font-size: 52px;
-    letter-spacing: -0.01em;
-    color: #fff;
-  }
-  .logo .word .fem { color: var(--lavender); }
 </style>
 </head>
 <body>
@@ -223,10 +211,6 @@
       <h1>Until now.</h1>
       <div class="support">FemNEST maps the whole picture.</div>
     </div>
-    <div class="logo">
-      <svg class="mark" viewBox="0 0 100 100"></svg>
-      <div class="word"><span class="fem">Fem</span>NEST</div>
-    </div>
   </section>
 
   <!-- ============ SLIDE 4 ============ -->
@@ -244,29 +228,9 @@
       <div class="step"><div class="node"></div><div class="label">Advocacy</div></div>
       <div class="step cta"><div class="node"></div><div class="label">Start with FemNEST</div></div>
     </div>
-    <div class="logo">
-      <svg class="mark" viewBox="0 0 100 100"></svg>
-      <div class="word"><span class="fem">Fem</span>NEST</div>
-    </div>
   </section>
 
 <script>
-  // ---- FemNEST nest logo (recreated placeholder mark) ----
-  const markSVG = `
-    <defs></defs>
-    <!-- overlapping bowl of half-circles -->
-    <g>
-      <path d="M6 62 a44 44 0 0 1 88 0 Z" fill="#295df6"/>
-      <path d="M16 62 a34 34 0 0 1 68 0 Z" fill="#ec6a2c"/>
-      <path d="M28 62 a22 22 0 0 1 44 0 Z" fill="#f2cdfc"/>
-      <path d="M38 62 a12 12 0 0 1 24 0 Z" fill="#deea9e"/>
-    </g>
-    <!-- dark figure/head resting in the nest -->
-    <circle cx="50" cy="40" r="13" fill="#141414"/>
-    <path d="M34 62 a16 16 0 0 1 32 0 Z" fill="#141414"/>
-  `;
-  document.querySelectorAll('.mark').forEach(m => m.innerHTML = markSVG);
-
   // ---- helper ----
   function el(tag, cls){ const e=document.createElement('div'); if(cls) e.className=cls; return e; }
   function mkDot(container, x, y, size, color, opacity){

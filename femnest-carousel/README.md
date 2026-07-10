@@ -26,12 +26,6 @@ FemNEST connects them.
 - Lavender `#f2cdfc` (wordmark + connector line accents)
 - Cream `#eee7ce` (light text on blue)
 
-## Logo
-The FemNEST nest mark is a **recreated placeholder** (inline SVG): a dark
-figure/head resting in an overlapping bowl of orange/blue/lavender/lime
-half-circles, with a "FemNEST" wordmark. Replace it if an official asset is
-dropped into the repo.
-
 ## Rendering
 ```
 NODE_PATH=/opt/node22/lib/node_modules node render.js
